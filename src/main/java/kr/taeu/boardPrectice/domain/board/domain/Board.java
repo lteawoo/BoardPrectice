@@ -10,7 +10,10 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.lang.NonNull;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "BOARD")
 @IdClass(BoardPk.class)
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board {
   @Id
   @Column(name = "BOARD_NO", nullable = false, unique = true, updatable = false)
@@ -27,11 +30,16 @@ public class Board {
   @Column(name = "NAME", nullable = false, unique = false, updatable = true, length = 20)
   private String boardName;
 
-  @Column(name = "CREATE_DATE", nullable = false, unique = false, updatable = false)
+  @Column(name = "CREATE_DATE", nullable = true, unique = false, updatable = false)
   @CreatedDate
   private LocalDateTime createDate;
   
-  @Column(name = "LAST_MODIFIED_DATE", nullable = false, unique = false, updatable = true)
+  @Column(name = "LAST_MODIFIED_DATE", nullable = true, unique = false, updatable = true)
   @LastModifiedDate
   private LocalDateTime lastModifiedDate;
+  
+  @Builder
+  public Board(@NonNull final String boardName) {
+    this.boardName = boardName;
+  }
 }
