@@ -28,7 +28,7 @@ public class Post {
   
   @ManyToOne
   @JoinColumns({
-    @JoinColumn(name = "BOARD_NO", referencedColumnName = "BOARD_NO", nullable = false)
+    @JoinColumn(name = "BOARD_ID", referencedColumnName = "BOARD_ID", nullable = false)
   })
   private Board board;
   

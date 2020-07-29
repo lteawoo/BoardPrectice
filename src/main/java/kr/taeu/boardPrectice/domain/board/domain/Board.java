@@ -24,8 +24,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board {
   @Id
-  @Column(name = "BOARD_NO", nullable = false, unique = true, updatable = false)
-  private Long boardNo;
+  @Column(name = "BOARD_ID", nullable = false, unique = true, updatable = false)
+  private String boardId;
   
   @Column(name = "NAME", nullable = false, unique = false, updatable = true, length = 20)
   private String boardName;
@@ -39,7 +39,8 @@ public class Board {
   private LocalDateTime lastModifiedDate;
   
   @Builder
-  public Board(@NonNull final String boardName) {
+  public Board(@NonNull final String boardId, @NonNull final String boardName) {
+    this.boardId = boardId;
     this.boardName = boardName;
   }
 }

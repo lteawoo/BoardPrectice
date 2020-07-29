@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class BoardPk implements Serializable{
   private static final long serialVersionUID = 9190089886520699913L;
   
-  private Long boardNo;
+  private String boardId;
   
   @Override
   public boolean equals(Object o) {
@@ -21,12 +21,12 @@ public class BoardPk implements Serializable{
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BoardPk boardId = (BoardPk) o;
-    return boardNo.equals(boardId.boardNo);
+    BoardPk boardPk = (BoardPk) o;
+    return boardId.equals(boardPk.boardId);
   }
   
   @Override
   public int hashCode() {
-    return Objects.hash(boardNo);
+    return Objects.hash(boardId);
   }
 }

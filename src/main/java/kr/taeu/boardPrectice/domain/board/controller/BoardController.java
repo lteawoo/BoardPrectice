@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,16 +25,18 @@ public class BoardController {
   private final BoardService boardService;
   
 	@GetMapping("/isRunning")
-	public String index() {
+	public String isRunning() {
 		return "board run..";
 	}
 	
-	@GetMapping("/read")
-	public String read() {
+	@GetMapping("/{boardNo}")
+	public String index(@PathVariable("boardNo") String boardNo) {
+	  log.info("boardNo: " + boardNo);
 		return "read";
 	}
 	
-	@PutMapping("/write")
+	// 반환값 추후 response 클래스로 변경해야함.
+	@PutMapping("/create")
 	public Board write(@RequestBody @Valid final CreateBoardRequest dto) {
 	  log.info("Create Board: " + dto.getBoardName());
 		return boardService.create(dto);
@@ -46,6 +49,6 @@ public class BoardController {
 	
 	@DeleteMapping("/delete")
 	public String delete() {
-		return "update";
+		return "delete";
 	}
 }
