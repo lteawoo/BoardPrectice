@@ -14,20 +14,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateBoardRequest {
   @NotEmpty
-  private String boardId;
+  private Long id;
   @NotEmpty
-  private String boardName;
+  private String name;
   
   @Builder
-  public CreateBoardRequest(@NonNull final String boardId, @NonNull final String boardName) {
-    this.boardId = boardId;
-    this.boardName = boardName;
+  public CreateBoardRequest(@NonNull final Long id, @NonNull final String name) {
+    this.id = id;
+    this.name = name;
   }
   
   public Board toEntity() {
     return Board.builder()
-        .boardId(this.boardId)
-        .boardName(this.boardName)
+        .id(this.id)
+        .name(this.name)
         .build();
   }
 }

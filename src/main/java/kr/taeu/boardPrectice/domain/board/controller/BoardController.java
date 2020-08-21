@@ -4,14 +4,15 @@ import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.taeu.boardPrectice.domain.board.domain.Board;
+import kr.taeu.boardPrectice.domain.board.domain.BoardPk;
+import kr.taeu.boardPrectice.domain.board.dto.BoardResponse;
 import kr.taeu.boardPrectice.domain.board.dto.CreateBoardRequest;
 import kr.taeu.boardPrectice.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -29,26 +30,24 @@ public class BoardController {
 		return "board run..";
 	}
 	
-	@GetMapping("/{boardNo}")
-	public String index(@PathVariable("boardNo") String boardNo) {
-	  log.info("boardNo: " + boardNo);
-		return "read";
+	@GetMapping("/{boardId}")
+	public BoardResponse getById(@PathVariable("boardId") final Long boardId) {
+	  log.info("boardId: " + boardId);
+		return new BoardResponse(boardService.findById(boardId));
 	}
 	
-	// 반환값 추후 response 클래스로 변경해야함.
-	@PutMapping("/create")
-	public Board write(@RequestBody @Valid final CreateBoardRequest dto) {
-	  log.info("Create Board: " + dto.getBoardName());
-		return boardService.create(dto);
+	@PostMapping()
+	public BoardResponse write(@RequestBody @Valid final CreateBoardRequest dto) {
+	  log.info("Create Board: " + dto.getName());
+		return new BoardResponse(boardService.create(dto));
 	}
 	
-	@PostMapping("/update")
-	public String update() {
-		return "update";
+	@PatchMapping("/{boardId}")
+	public void update(@RequestBody @Valid final ) {
+		
 	}
 	
-	@DeleteMapping("/delete")
-	public String delete() {
-		return "delete";
+	@DeleteMapping("/{boardId}")
+	public void delete() {
 	}
 }

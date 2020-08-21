@@ -3,7 +3,8 @@ package kr.taeu.boardPrectice.domain.board.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.taeu.boardPrectice.domain.board.domain.Board;
+import kr.taeu.boardPrectice.domain.board.domain.BoardPk;
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, BoardPk> {
 
 }
